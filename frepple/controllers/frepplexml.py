@@ -266,7 +266,7 @@ class XMLController(odoo.http.Controller):
         req.session.db = database
         try:
             uid = self.authenticate(req, database, language, company, version)
-            req._env = req.env(user=uid)
+            req.env = req.env(user=uid)   # ← req.env i.p.v. req._env
         except Exception as e:
             logger.warning("Failed login attempt: %s" % e)
             return Response(
